@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coffee List - Coffee Corner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body class="bg-white text-black">
+
+  <!-- Header -->
+  <header class="bg-[#8B4513] text-white p-4 shadow">
+    <nav class="flex justify-between items-center max-w-6xl mx-auto">
+      <h1 class="text-xl font-bold">Coffee Corner</h1>
+      <ul class="flex space-x-4 text-sm md:text-base">
+        <li><a href="index.html" class="hover:text-yellow-300">Home</a></li>
+        <li><a href="coffee.html" class="hover:text-yellow-300">Coffees</a></li>
+        <li><a href="media.html" class="hover:text-yellow-300">Media</a></li>
+        <li><a href="feedback.html" class="hover:text-yellow-300">Feedback</a></li>
+        <li><a href="user.html" class="hover:text-yellow-300">Location</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Search + Sort -->
+  <div class="p-2 flex flex-col sm:flex-row gap-2 items-start sm:items-center justify-start max-w-4xl mx-auto">
+    <input type="text" id="searchInput" placeholder="Search coffee" class="border px-2 py-1 w-full sm:w-64" />
+    <select id="sortSelect" class="border px-2 py-1">
+      <option value="asc">Sort A-Z</option>
+      <option value="desc">Sort Z-A</option>
+    </select>
+    <button onclick="filterCoffees()" class="bg-gray-700 text-white px-3 py-1">Search</button>
+  </div>
+
+  <!-- Coffee Items -->
+  <section class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 max-w-4xl mx-auto justify-items-start sm:justify-items-center" id="coffeeList">
+    <!-- Coffee cards will be injected here -->
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#8B4513] text-white text-center p-4 mt-6">
+    <p>17 JULY 2025 || Coffee Corner || ADITI AHUJA</p>
+  </footer>
+
+  <script>
+    let coffeeData = [];
+
+    async function fetchCoffees() {
+      const res = await fetch("https://api.sampleapis.com/coffee/hot");
+      const data = await res.json();
+      coffeeData = data.slice(0, 8);
+      displayCoffees(coffeeData);
+    }
+
+    function displayCoffees(coffees) {
+      const list = document.getElementById("coffeeList");
+      list.innerHTML = "";
+
+      coffees.forEach(c => {
+        list.innerHTML += `
+          <div class="border p-3 max-w-sm w-full">
+            <img src="${c.image}" alt="${c.title}" class="w-full h-40 object-cover mb-2">
+            <h3 class="font-semibold text-lg mb-1">${c.title}</h3>
+            <p class="text-sm mb-1">${c.description}</p>
+            <p class="text-xs"><b>Ingredients:</b> ${c.ingredients.join(", ")}</p>
+          </div>
+        `;
+      });
+    }
+
+    function filterCoffees() {
+      const term = document.getElementById("searchInput").value.toLowerCase();
+      const sort = document.getElementById("sortSelect").value;
+
+      let filtered = coffeeData.filter(c => c.title.toLowerCase().includes(term));
+
+      if (sort === "asc") filtered.sort((a, b) => a.title.localeCompare(b.title));
+      else filtered.sort((a, b) => b.title.localeCompare(a.title));
+
+      displayCoffees(filtered);
+    }
+
+    window.onload = fetchCoffees;
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media | Coffee Corner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+
+<body class="bg-white text-black">
+ 
+    <header class="bg-[#8B4513] text-white p-4 shadow">
+    <nav class="flex justify-between items-center max-w-6xl mx-auto">
+      <!-- Logo and Title -->
+      <div class="flex items-center space-x-2">
+
+        <h1 class="text-xl font-bold text-white">Coffee Corner</h1>
+      </div>
+      <!-- Navigation Links -->
+      <ul class="flex space-x-4 text-sm md:text-base">
+        <li><a href="index.html" class="hover:text-yellow-300"></a> Home</a></li>
+        <li><a href="coffee.html" class="hover:text-yellow-300"> Coffees</a></li>
+        <li><a href="media.html" class="hover:text-yellow-300"> Media</a></li>
+        <li><a href="feedback.html" class="hover:text-yellow-300"> Feedback</a></li>
+        <li><a href="user.html" class="hover:text-yellow-300"> Location</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Media Section -->
+  <section class="p-6">
+    <h2 class="text-2xl font-semibold mb-4">Watch Coffee Brewing in Action</h2>
+    <video controls width="100%" class="mb-6">
+      <source src="media/Set2 Video.mp4" type="video/mp4">
+      <track src="brewing.vtt" kind="subtitles" srclang="en" label="English">
+      Your browser does not support the video tag.
+    </video>
+
+    <h2 class="text-2xl font-semibold mb-4">Listen to Types of Coffee</h2>
+    <audio controls class="mb-6">
+      <source src="media/Set2 Audio.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+  </section>
+   <!-- Footer -->
+  <footer class="bg-[#8B4513] text-white text-center p-4 mt-6">
+    <p>17 JULY 2025 || Coffee Corner || ADITI AHUJA</p>
+  </footer>
+</body>
+
+</html>
